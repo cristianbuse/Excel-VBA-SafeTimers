@@ -8,7 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 '''=============================================================================
-''' VBA MemoryTools
+''' Excel-VBA-SafeTimers
 ''' ----------------------------------------------------
 ''' https://github.com/cristianbuse/Excel-VBA-SafeTimers
 ''' ----------------------------------------------------

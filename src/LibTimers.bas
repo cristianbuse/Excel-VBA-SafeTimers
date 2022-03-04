@@ -1,6 +1,6 @@
 Attribute VB_Name = "LibTimers"
 '''=============================================================================
-''' VBA MemoryTools
+''' Excel-VBA-SafeTimers
 ''' ----------------------------------------------------
 ''' https://github.com/cristianbuse/Excel-VBA-SafeTimers
 ''' ----------------------------------------------------
