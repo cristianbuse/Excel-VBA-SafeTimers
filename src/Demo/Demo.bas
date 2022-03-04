@@ -33,5 +33,6 @@ End Sub
 Private Sub DynamicIDTimer(ByVal hWnd As LongPtr, ByVal nIDEvent As LongPtr)
     Static c As Long
     c = c + 1
+    If c = 20 Then KillTimer hWnd, nIDEvent
     Debug.Print Round(CDbl(Timer), 3), hWnd, nIDEvent, "Dynamic"
 End Sub
