@@ -13,6 +13,8 @@ If multiple books within the current application instance are using timers, then
 
 The remote application is automatically terminated when there are no more books left to manage i.e. the current application was closed.
 
+Related [Core Review question](https://codereview.stackexchange.com/questions/274652/safe-windows-api-timers-for-excel)
+
 ## Installation
 Just import the following code modules in your VBA Project:
 * [**LibTimers.bas**](https://github.com/cristianbuse/Excel-VBA-SafeTimers/blob/master/src/LibTimers.bas)
