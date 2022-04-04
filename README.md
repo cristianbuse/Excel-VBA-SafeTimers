@@ -19,8 +19,10 @@ Quick comparison of both solutions:
 
 |#|Approch|Platform     |Crashes|App busy|Debugging|Formula Edit|Modal app dialog|Modal Userform|
 |-|-------|-------------|-------|--------|---------|------------|----------------|--------------|
-|1|Native |Windows + Mac|None   |Waits   |Waits    |Waits       |Waits           |Executes      |
+|1|Native |Windows + Mac|None   |Waits   |Waits    |Waits*      |Waits           |Executes      |
 |2|Win API|Windows Only |Rare   |Waits   |Waits    |Executes    |Executes        |Waits         |
+
+<sup>*using formulas is slowed down while there are timers pending. If no timer is pending then speed is normal.</sup>
 
 ## Native Solution #1
 
@@ -32,12 +34,12 @@ When creating a new timer using the ```CreateTimer``` method, there are 2 option
 
 ### Installation
 Just import the following code modules in your VBA Project:
-* **LibTimers.bas**
-* **TimerCallback.cls**
+* [**LibTimers.bas**](https://github.com/cristianbuse/Excel-VBA-SafeTimers/blob/master/src/Solution%201%20-%20Native%20(Win%20%2B%20Mac)/LibTimers.bas)
+* [**TimerCallback.cls**](https://github.com/cristianbuse/Excel-VBA-SafeTimers/blob/master/src/Solution%201%20-%20Native%20(Win%20%2B%20Mac)/TimerCallback.cls)
 
 ### Demo
 Import the following code module:
-* Demo.bas - run ```DemoMain```
+* [Demo.bas](https://github.com/cristianbuse/Excel-VBA-SafeTimers/blob/master/src/Solution%201%20-%20Native%20(Win%20%2B%20Mac)/Demo/Demo.bas) - run ```DemoMain```
 
 ## Windows API Solution #2
 
@@ -47,12 +49,12 @@ No timers are left hanging. Even if state is lost, the remote app will make sure
 
 ### Installation
 Just import the following code modules in your VBA Project:
-* **LibTimers.bas**
-* **SafeDispatch.cls**
+* [**LibTimers.bas**](https://github.com/cristianbuse/Excel-VBA-SafeTimers/blob/master/src/Solution%202%20-%20Windows%20only%20APIs/LibTimers.bas)
+* [**SafeDispatch.cls**](https://github.com/cristianbuse/Excel-VBA-SafeTimers/blob/master/src/Solution%202%20-%20Windows%20only%20APIs/SafeDispatch.cls)
 
 ### Demo
 Import the following code module:
-* Demo.bas - run ```DemoMain```
+* [Demo.bas](https://github.com/cristianbuse/Excel-VBA-SafeTimers/blob/master/src/Solution%202%20-%20Windows%20only%20APIs/Demo/Demo.bas) - run ```DemoMain```
 
 ## License
 MIT License
