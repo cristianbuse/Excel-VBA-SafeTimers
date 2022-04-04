@@ -57,11 +57,9 @@ Public Property Get ID() As String
     ID = m_id
 End Property
 
-Public Function TimerProc() As Boolean
-    Const errRunFailed As Long = 50290
-    '
+Public Function TimerProc() As Long
     On Error Resume Next
     Application.Run m_callbackName, m_id, m_data
-    TimerProc = (Err.Number <> errRunFailed)
+    TimerProc = Err.Number
     On Error GoTo 0
 End Function

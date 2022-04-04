@@ -117,16 +117,18 @@ Private Sub InsertTimer(ByRef container As TimerContainer)
 End Sub
 
 Public Function PopIfNeeded() As Boolean
+    Const errNotAvailable As Long = 1004
+    Const errRunFailed As Long = 50290
     Const errObjDisconnected As Long = -2147417848
     '
     Dim tc As TimerContainer: Set tc = m_timers(1)
-    Dim isSuccesful As Boolean
+    Dim remoteErrCode As Long
     '
     If tc.EarliestTime > NowMSec() Then Exit Function
     PopIfNeeded = True
     '
     On Error Resume Next
-    isSuccesful = tc.TimerCallback.TimerProc() 'Possible re-entry point!
+    remoteErrCode = tc.TimerCallback.TimerProc() 'Possible re-entry point!
     If Err.Number = errObjDisconnected Then Exit Function
     Err.Clear
     m_timers.Remove tc.ID
@@ -136,10 +138,11 @@ Public Function PopIfNeeded() As Boolean
     End If
     On Error GoTo 0
     '
+    If remoteErrCode = errNotAvailable Then Exit Function
     If tc.Delay > 0 Then
         tc.UpdateTime
         InsertTimer tc
-    ElseIf Not isSuccesful Then
+    ElseIf remoteErrCode = errRunFailed Then
         InsertTimer tc '0 delay timers are guaranteed to be called once!
     End If
 End Function
