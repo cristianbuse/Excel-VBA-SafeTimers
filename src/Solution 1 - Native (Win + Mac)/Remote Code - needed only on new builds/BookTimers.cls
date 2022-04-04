@@ -117,9 +117,11 @@ Private Sub InsertTimer(ByRef container As TimerContainer)
 End Sub
 
 Public Function PopIfNeeded() As Boolean
+    Const errMissingArgument As Long = 449
     Const errNotAvailable As Long = 1004
-    Const errRunFailed As Long = 50290
     Const errObjDisconnected As Long = -2147417848
+    Const errRunFailed As Long = 50290
+    Const errTypeMismatch As Long = 13
     '
     Dim tc As TimerContainer: Set tc = m_timers(1)
     Dim remoteErrCode As Long
@@ -138,7 +140,10 @@ Public Function PopIfNeeded() As Boolean
     End If
     On Error GoTo 0
     '
+    If remoteErrCode = errMissingArgument Then Exit Function
     If remoteErrCode = errNotAvailable Then Exit Function
+    If remoteErrCode = errTypeMismatch Then Exit Function
+    '
     If tc.Delay > 0 Then
         tc.UpdateTime
         InsertTimer tc

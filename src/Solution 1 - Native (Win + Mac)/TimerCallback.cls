@@ -58,8 +58,24 @@ Public Property Get ID() As String
 End Property
 
 Public Function TimerProc() As Long
+    Const errMissingArgument As Long = 449
+    Const errNotAvailable As Long = 1004
+    Const errTypeMismatch As Long = 13
+    Dim errCode As Long
+    '
     On Error Resume Next
     Application.Run m_callbackName, m_id, m_data
-    TimerProc = Err.Number
+    errCode = Err.Number
     On Error GoTo 0
+    '
+    Select Case errCode
+    Case errMissingArgument
+        Debug.Print m_id & " - Missing argument for: " & m_callbackName
+    Case errNotAvailable
+        Debug.Print m_id & " - Invalid method name: " & m_callbackName
+    Case errTypeMismatch
+        Debug.Print m_id & " - Wrong argument type for: " & m_callbackName
+    End Select
+    '
+    TimerProc = errCode
 End Function
