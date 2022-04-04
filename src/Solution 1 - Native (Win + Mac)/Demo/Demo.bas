@@ -1,7 +1,7 @@
 Attribute VB_Name = "Demo"
 Option Explicit
 
-Sub TestTimers()
+Sub DemoMain()
     Dim t As Date: t = NowMs
     Debug.Print t
     '
