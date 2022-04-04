@@ -22,7 +22,7 @@ Quick comparison of both solutions:
 |1|Native |Windows + Mac|None   |Waits   |Waits    |Waits*      |Waits           |Executes      |
 |2|Win API|Windows Only |Rare   |Waits   |Waits    |Executes    |Executes        |Waits         |
 
-<sup>*using formulas is slowed down while there are timers pending. If no timer is pending then speed is normal.</sup>
+<sup>*editing formulas is slowed down while there are timers pending. If no timer is pending then speed is normal.</sup>
 
 ## Native Solution #1
 
