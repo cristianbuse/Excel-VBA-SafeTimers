@@ -122,6 +122,7 @@ Public Function PopIfNeeded() As Boolean
     Const errObjDisconnected As Long = -2147417848
     Const errRunFailed As Long = 50290
     Const errTypeMismatch As Long = 13
+    Const errWrongArguments As Long = 450
     '
     Dim tc As TimerContainer: Set tc = m_timers(1)
     Dim remoteErrCode As Long
@@ -143,6 +144,7 @@ Public Function PopIfNeeded() As Boolean
     If remoteErrCode = errMissingArgument Then Exit Function
     If remoteErrCode = errNotAvailable Then Exit Function
     If remoteErrCode = errTypeMismatch Then Exit Function
+    If remoteErrCode = errWrongArguments Then Exit Function
     '
     If tc.Delay > 0 Then
         tc.UpdateTime

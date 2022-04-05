@@ -755,6 +755,7 @@ s = s & "    Const errNotAvailable As Long = 1004" & n
 s = s & "    Const errObjDisconnected As Long = -2147417848" & n
 s = s & "    Const errRunFailed As Long = 50290" & n
 s = s & "    Const errTypeMismatch As Long = 13" & n
+s = s & "    Const errWrongArguments As Long = 450" & n
 s = s & "    '" & n
 s = s & "    Dim tc As TimerContainer: Set tc = m_timers(1)" & n
 s = s & "    Dim remoteErrCode As Long" & n
@@ -776,6 +777,7 @@ s = s & "    '" & n
 s = s & "    If remoteErrCode = errMissingArgument Then Exit Function" & n
 s = s & "    If remoteErrCode = errNotAvailable Then Exit Function" & n
 s = s & "    If remoteErrCode = errTypeMismatch Then Exit Function" & n
+s = s & "    If remoteErrCode = errWrongArguments Then Exit Function" & n
 s = s & "    '" & n
 s = s & "    If tc.Delay > 0 Then" & n
 s = s & "        tc.UpdateTime" & n

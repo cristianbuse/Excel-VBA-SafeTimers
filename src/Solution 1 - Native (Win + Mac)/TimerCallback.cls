@@ -61,6 +61,7 @@ Public Function TimerProc() As Long
     Const errMissingArgument As Long = 449
     Const errNotAvailable As Long = 1004
     Const errTypeMismatch As Long = 13
+    Const errWrongArguments As Long = 450
     Dim errCode As Long
     '
     On Error Resume Next
@@ -75,6 +76,8 @@ Public Function TimerProc() As Long
         Debug.Print m_id & " - Invalid method name: " & m_callbackName
     Case errTypeMismatch
         Debug.Print m_id & " - Wrong argument type for: " & m_callbackName
+    Case errWrongArguments
+        Debug.Print m_id & " - Wrong number of arguments for: " & m_callbackName
     End Select
     '
     TimerProc = errCode
