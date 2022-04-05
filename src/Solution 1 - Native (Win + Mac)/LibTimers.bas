@@ -122,7 +122,7 @@ Public Function RemoveTimer(ByVal timerID As String) As Boolean
         RequestEntry
         RemoveTimer = m_remoteTimers.DeleteTimer(timerID)
         If Not RemoveTimer Then
-            If Not IsConnected(m_remoteTimers) Then Exit Do
+            If Not InitTimers(reCreateBook:=False) Then Exit Do
             Sleep 1
         End If
     Loop Until RemoveTimer
@@ -139,7 +139,7 @@ Public Function RemoveAllTimers() As Boolean
         RequestEntry
         RemoveAllTimers = m_remoteTimers.DeleteAllTimers()
         If Not RemoveAllTimers Then
-            If Not IsConnected(m_remoteTimers) Then Exit Do
+            If Not InitTimers(reCreateBook:=False) Then Exit Do
             Sleep 1
         End If
     Loop Until RemoveAllTimers
