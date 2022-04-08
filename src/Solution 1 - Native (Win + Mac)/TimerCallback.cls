@@ -65,6 +65,7 @@ Public Function TimerProc() As Long
     Dim errCode As Long
     '
     On Error Resume Next
+    DoEvents
     Application.Run m_callbackName, m_id, m_data
     errCode = Err.Number
     On Error GoTo 0
