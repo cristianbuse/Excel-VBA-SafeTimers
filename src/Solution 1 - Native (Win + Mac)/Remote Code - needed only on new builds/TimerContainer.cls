@@ -15,6 +15,7 @@ Private m_delayMs As Long
 Private m_earliestTime As Date
 Private m_originalTime As Date
 Private m_daysDelay As Double
+Private m_notAvailableCount As Long
 
 Public Sub Init(ByRef tCallback As Object _
               , ByRef timerID As String _
@@ -58,3 +59,12 @@ Public Sub UpdateTime()
     skipCount = Int((NowMSec() - m_originalTime) / m_daysDelay)
     m_earliestTime = m_originalTime + (skipCount + 1) * m_daysDelay
 End Sub
+
+Public Property Get NotAvailableCount() As Long
+    NotAvailableCount = m_notAvailableCount
+End Property
+Public Property Let NotAvailableCount(ByVal newValue As Long)
+    m_notAvailableCount = newValue
+End Property
+
+

@@ -536,6 +536,7 @@ s = s & "Private m_delayMs As Long" & n
 s = s & "Private m_earliestTime As Date" & n
 s = s & "Private m_originalTime As Date" & n
 s = s & "Private m_daysDelay As Double" & n
+s = s & "Private m_notAvailableCount As Long" & n
 s = s & "" & n
 s = s & "Public Sub Init(ByRef tCallback As Object _" & n
 s = s & "              , ByRef timerID As String _" & n
@@ -578,7 +579,16 @@ s = s & "    Dim skipCount As Long" & n
 s = s & "    '" & n
 s = s & "    skipCount = Int((NowMSec() - m_originalTime) / m_daysDelay)" & n
 s = s & "    m_earliestTime = m_originalTime + (skipCount + 1) * m_daysDelay" & n
-s = s & "End Sub"
+s = s & "End Sub" & n
+s = s & "" & n
+s = s & "Public Property Get NotAvailableCount() As Long" & n
+s = s & "    NotAvailableCount = m_notAvailableCount" & n
+s = s & "End Property" & n
+s = s & "Public Property Let NotAvailableCount(ByVal newValue As Long)" & n
+s = s & "    m_notAvailableCount = newValue" & n
+s = s & "End Property" & n
+s = s & "" & n
+s = s & ""
 TimerContainerCode = s
 End Function
 Private Function AppTimersCode() As String
@@ -775,14 +785,20 @@ s = s & "    End If" & n
 s = s & "    On Error GoTo 0" & n
 s = s & "    '" & n
 s = s & "    If remoteErrCode = errMissingArgument Then Exit Function" & n
-s = s & "    If remoteErrCode = errNotAvailable Then Exit Function" & n
 s = s & "    If remoteErrCode = errTypeMismatch Then Exit Function" & n
 s = s & "    If remoteErrCode = errWrongArguments Then Exit Function" & n
+s = s & "    If remoteErrCode = errNotAvailable Then" & n
+s = s & "        Const notAvailableLimit As Long = 10" & n
+s = s & "        tc.NotAvailableCount = tc.NotAvailableCount + 1" & n
+s = s & "        If tc.NotAvailableCount > notAvailableLimit Then Exit Function" & n
+s = s & "    Else" & n
+s = s & "        tc.NotAvailableCount = 0" & n
+s = s & "    End If" & n
 s = s & "    '" & n
 s = s & "    If tc.Delay > 0 Then" & n
 s = s & "        tc.UpdateTime" & n
 s = s & "        InsertTimer tc" & n
-s = s & "    ElseIf remoteErrCode = errRunFailed Then" & n
+s = s & "    ElseIf remoteErrCode = errRunFailed Or remoteErrCode = errNotAvailable Then" & n
 s = s & "        InsertTimer tc '0 delay timers are guaranteed to be called once!" & n
 s = s & "    End If" & n
 s = s & "End Function"

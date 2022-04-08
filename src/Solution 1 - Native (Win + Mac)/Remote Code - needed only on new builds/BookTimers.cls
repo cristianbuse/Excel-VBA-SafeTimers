@@ -142,14 +142,20 @@ Public Function PopIfNeeded() As Boolean
     On Error GoTo 0
     '
     If remoteErrCode = errMissingArgument Then Exit Function
-    If remoteErrCode = errNotAvailable Then Exit Function
     If remoteErrCode = errTypeMismatch Then Exit Function
     If remoteErrCode = errWrongArguments Then Exit Function
+    If remoteErrCode = errNotAvailable Then
+        Const notAvailableLimit As Long = 10
+        tc.NotAvailableCount = tc.NotAvailableCount + 1
+        If tc.NotAvailableCount > notAvailableLimit Then Exit Function
+    Else
+        tc.NotAvailableCount = 0
+    End If
     '
     If tc.Delay > 0 Then
         tc.UpdateTime
         InsertTimer tc
-    ElseIf remoteErrCode = errRunFailed Then
+    ElseIf remoteErrCode = errRunFailed Or remoteErrCode = errNotAvailable Then
         InsertTimer tc '0 delay timers are guaranteed to be called once!
     End If
 End Function
