@@ -236,8 +236,6 @@ Private Function GetRemoteApp() As Application
             If wndName = CStr(ObjPtr(Application)) Then
                 Set app = book.Application
                 Exit For
-            Else
-                Stop
             End If
             CancelEntry
         End If
