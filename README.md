@@ -1,3 +1,9 @@
+## Update Feb 2023
+
+This solution is no longer maintained here or on Code Review, mainly because I do not need a timer solution anymore. The only purpose of this approach was to get a reliable, crash-free call that can get Excel out of UDF mode - which I've eventually achieved by posting a ```WM_DESTROY``` message to a userform. See [here](https://github.com/cristianbuse/VBA-FastExcelUDFs). This repository is now purely an exercise in how to work from a remote application instance and get somewhat reliable timer functionality without crashes. **I do not recommend using this solution into an actual VBA project!**
+
+***
+
 # Excel-VBA-SafeTimers
 Safe Windows API timers for Excel.
 
